@@ -1,0 +1,90 @@
+/**
+ * Google Fonts families available for free web use.
+ * All names are lowercase for case-insensitive comparison.
+ * Source: https://fonts.google.com/
+ * Last updated: 2026-03 — append new fonts to extend the list.
+ */
+export const GOOGLE_FONTS_LIST: string[] = [
+  // ── Sans-serif ─────────────────────────────────────────────────────────
+  'roboto', 'open sans', 'lato', 'montserrat', 'oswald', 'raleway',
+  'poppins', 'ubuntu', 'rubik', 'inter', 'nunito', 'work sans',
+  'fira sans', 'barlow', 'karla', 'mulish', 'heebo', 'dm sans',
+  'plus jakarta sans', 'be vietnam pro', 'figtree', 'outfit', 'epilogue',
+  'jost', 'urbanist', 'unbounded', 'bricolage grotesque', 'instrument sans',
+  'geist', 'space grotesk', 'manrope', 'syne', 'exo 2', 'titillium web',
+  'dosis', 'quicksand', 'cabin', 'oxygen', 'asap', 'arimo',
+  'josefin sans', 'varela round', 'fjalla one', 'signika', 'muli',
+  'noto sans', 'source sans pro', 'source sans 3', 'nanum gothic',
+  'kanit', 'prompt', 'sarabun', 'exo', 'questrial', 'hind',
+  'public sans', 'lexend', 'lexend deca', 'ibm plex sans',
+  'red hat display', 'red hat text', 'overpass', 'nunito sans',
+  'maven pro', 'zilla slab', 'teko', 'chivo', 'catamaran',
+  'encode sans', 'encode sans condensed', 'encode sans narrow',
+  'encode sans semi condensed', 'encode sans semi expanded', 'encode sans expanded',
+  'noto sans jp', 'noto sans kr', 'noto sans sc', 'noto sans tc',
+  'gothic a1', 'rajdhani', 'niramit', 'tajawal', 'cairo', 'almarai', 'amiri',
+  'albert sans', 'fraunces', 'recursive', 'anybody',
+  'big shoulders display', 'big shoulders text',
+  'changa', 'julius sans one', 'expletus sans',
+  'monda', 'ruda', 'viga', 'armata', 'cuprum', 'convergence',
+  'yanone kaffeesatz', 'istok web', 'economica', 'telex',
+  'kreon', 'aldrich', 'magra', 'hammersmith one',
+  'scada', 'carrois gothic', 'carrois gothic sc',
+  'antonio', 'barlow condensed', 'barlow semi condensed',
+  'saira', 'saira condensed', 'saira semi condensed', 'saira extra condensed',
+  'inter tight', 'noto sans display',
+  'lexend exa', 'lexend giga', 'lexend mega', 'lexend peta', 'lexend tera', 'lexend zetta',
+  'albert sans', 'onest', 'sora', 'hahmlet',
+
+  // ── Serif ───────────────────────────────────────────────────────────────
+  'cinzel', 'cinzel decorative',
+  'merriweather', 'playfair display', 'lora', 'source serif pro', 'source serif 4',
+  'pt serif', 'arvo', 'bitter', 'vollkorn', 'cardo', 'libre baskerville',
+  'eb garamond', 'cormorant garamond', 'spectral', 'dm serif display',
+  'instrument serif', 'crimson text', 'crimson pro', 'noto serif',
+  'frank ruhl libre', 'libre caslon text', 'libre caslon display',
+  'gelasio', 'unna', 'aleo', 'eczar', 'cormorant', 'cormorant infant',
+  'cormorant sc', 'cormorant upright', 'alice', 'gentium book plus', 'gentium plus',
+  'cambo', 'quattrocento', 'quattrocento sans', 'yeseva one', 'volkhov',
+  'playfair display sc', 'libre baskerville', 'noto serif jp', 'noto serif kr',
+  'podkova', 'martel', 'ibarra real nova', 'taviraj', 'trirong',
+  'rasa', 'kadwa', 'tinos', 'gelasio', 'gfs didot',
+  'abril fatface', 'ultra', 'bree serif', 'acme',
+
+  // ── Display / Decorative ────────────────────────────────────────────────
+  'comfortaa', 'pacifico', 'dancing script', 'lobster',
+  'righteous', 'fredoka one', 'bangers', 'bevan', 'alfa slab one',
+  'lilita one', 'russo one', 'boogaloo', 'chewy',
+  'titan one', 'capriola', 'courgette', 'kaushan script',
+  'great vibes', 'sacramento', 'satisfy', 'allura', 'alex brush',
+  'mr dafoe', 'parisienne', 'cookie', 'tangerine', 'pinyon script',
+  'petit formal script', 'cedarville cursive', 'ms madi',
+  'shadows into light', 'shadows into light two', 'rock salt',
+  'patrick hand', 'indie flower', 'amatic sc', 'caveat', 'caveat brush',
+  'permanent marker', 'sue ellen francisco',
+  'rammetto one', 'stalemate', 'special elite',
+  'stint ultra condensed', 'stint ultra expanded',
+  'league spartan', 'josefin slab',
+
+  // ── Monospace ───────────────────────────────────────────────────────────
+  'source code pro', 'space mono', 'dm mono', 'geist mono',
+  'fira code', 'jetbrains mono', 'inconsolata', 'courier prime',
+  'share tech mono', 'b612 mono', 'ibm plex mono', 'red hat mono',
+  'roboto mono', 'nanum gothic coding', 'overpass mono',
+  'ubuntu mono', 'oxygen mono', 'anonymous pro', 'cutive mono',
+  'major mono display', 'nova mono', 'pt mono',
+
+  // ── Variable / newer additions ──────────────────────────────────────────
+  'raleway dots', 'biorhyme', 'port lligat slab', 'port lligat sans',
+  'fanwood text', 'gilda display', 'clicker script',
+  'lekton', 'basic', 'terminal dosis', 'terminal dosis light',
+  'reggae one', 'rocknroll one', 'dela gothic one',
+  'mochiy pop one', 'mochiy pop p one',
+  'zen kaku gothic new', 'zen kaku gothic antique',
+  'zen old mincho', 'zen maru gothic', 'zen antique', 'zen antique soft',
+  'noto kufi arabic', 'noto naskh arabic',
+  'sawarabi mincho', 'sawarabi gothic', 'kosugi', 'kosugi maru',
+  'shippori mincho', 'shippori mincho b1', 'hina mincho',
+  'stick', 'train one',
+  'libre franklin', 'belleza', 'suez one',
+];
