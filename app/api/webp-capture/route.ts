@@ -14,7 +14,7 @@ const FPS                = 15;   // 15 fps is plenty; keeps file size reasonable
 const FRAME_COUNT        = Math.round((DURATION_MS / 1000) * FPS); // 45 frames
 const FRAME_DELAY_MS     = Math.round(DURATION_MS / FRAME_COUNT);  // ~67 ms / frame
 const FRAME_CAPTURE_WAIT = 80;   // ms to pause after each scroll before screenshotting
-const SCROLL_RATIO       = 0.45; // fraction of the page to scroll through (tweak to taste)
+const SCROLL_RATIO       = 0.3; // fraction of the page to scroll through (tweak to taste)
 
 
 const BANNER_SELECTORS = [
@@ -75,7 +75,7 @@ function buildAnimatedWebP(
   // ANIM chunk (bg colour 4 b + loop count 2 b = 6 b payload)
   const animData = Buffer.alloc(6, 0);
   animData.writeUInt32LE(0xffffffff, 0); // background: white (BGRA)
-  animData.writeUInt16LE(1, 4);          // loop once
+  animData.writeUInt16LE(0, 4);          // loop forever
   const animChunk = Buffer.concat([Buffer.from('ANIM'), u32le(6), animData]);
 
   // ANMF chunks – one per frame
@@ -100,6 +100,39 @@ function buildAnimatedWebP(
     ...anmfChunks,
   ]);
   return Buffer.concat([Buffer.from('RIFF'), u32le(riffBody.length), riffBody]);
+}
+
+// ── Popup dismissal ──────────────────────────────────────────────────────────
+
+const POPUP_CLOSE_SELECTORS = [
+  '[aria-label*="close" i]',
+  '[aria-label*="dismiss" i]',
+  '[data-testid*="close" i]',
+  '[class*="close" i][role="button"]',
+  'button[class*="close" i]',
+  'button[class*="dismiss" i]',
+  '[class*="modal" i] button',
+  '[class*="popup" i] button',
+  '[class*="overlay" i] button',
+  '[class*="lightbox" i] button',
+];
+
+async function dismissPopups(page: import('playwright').Page) {
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+
+  for (const sel of POPUP_CLOSE_SELECTORS) {
+    try {
+      const locator = page.locator(sel).first();
+      if (await locator.isVisible({ timeout: 300 })) {
+        await locator.click({ timeout: 1000 });
+        await page.waitForTimeout(600);
+        break;
+      }
+    } catch {
+      // not found or not clickable — try next selector
+    }
+  }
 }
 
 // ── Route handler ────────────────────────────────────────────────────────────
@@ -147,6 +180,8 @@ export async function POST(request: NextRequest) {
     // Wait for network to go quiet (lazy scripts, fonts, deferred assets)
     await page.waitForLoadState('networkidle', { timeout: 12000 }).catch(() => {});
     await page.waitForTimeout(2500); // let entrance animations + deferred JS finish
+
+    await dismissPopups(page);
 
     // Measure Wix banner (fixed element at top)
     const bannerHeight: number = await page.evaluate((sels: string[]) => {

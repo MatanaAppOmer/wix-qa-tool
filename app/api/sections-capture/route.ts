@@ -39,6 +39,37 @@ const FIND_HEADING_IN_VIEWPORT = `
   })
 `;
 
+const POPUP_CLOSE_SELECTORS = [
+  '[aria-label*="close" i]',
+  '[aria-label*="dismiss" i]',
+  '[data-testid*="close" i]',
+  '[class*="close" i][role="button"]',
+  'button[class*="close" i]',
+  'button[class*="dismiss" i]',
+  '[class*="modal" i] button',
+  '[class*="popup" i] button',
+  '[class*="overlay" i] button',
+  '[class*="lightbox" i] button',
+];
+
+async function dismissPopups(page: import('playwright').Page) {
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(400);
+
+  for (const sel of POPUP_CLOSE_SELECTORS) {
+    try {
+      const locator = page.locator(sel).first();
+      if (await locator.isVisible({ timeout: 300 })) {
+        await locator.click({ timeout: 1000 });
+        await page.waitForTimeout(600);
+        break;
+      }
+    } catch {
+      // not found or not clickable — try next selector
+    }
+  }
+}
+
 export async function POST(request: NextRequest) {
   let body: { url?: string };
   try {
@@ -74,6 +105,8 @@ export async function POST(request: NextRequest) {
     await page.goto(parsedUrl.href, { waitUntil: 'networkidle', timeout: 45000 })
       .catch(() => {}); // timeout = page still usable, just had ongoing requests
     await page.waitForTimeout(2000); // let deferred paint / animations settle
+
+    await dismissPopups(page);
 
     // ── 1. Measure Wix banner ────────────────────────────────────────────────
     const bannerHeight: number = await page.evaluate((sels: string[]) => {
